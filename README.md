@@ -1,4 +1,4 @@
-# profitAndLossCalculator
+# Profit and Loss Calculator
 Java Spring Boot Microservice for Profit and Loss Calculation
 
 Simple Java Spring boot application.
@@ -41,3 +41,56 @@ Docker Network Creation
 
 Docker run container on network
 > docker run --network my-network -p 5001:5001 <IMAGE_ID>
+
+Architecture Diagram:
+
+```
+
++----------------------+     +------------------------+     +-----------------------+
+|                      |     |                        |     |                       |
+| Simple Interest (SA) |     | Compound Interest (SB)  |     |  Profit and Loss (SC) |
+|                      |     |                        |     |                       |
++----------+-----------+     +------------+-----------+     +-----------+-----------+
+           |                               |                             |
+           |                               |                             |
+           |                               |                             |
+           +---------------+---------------+---------------+-------------+
+                           |                               |
+                           |                               |
+                           |                               |
+                           |                               |
+            +--------------v---------------+   +-------------v---------------+
+            |                              |   |                             |
+            |         SA- SB Communication |   |        SA-SC Communication  |
+            |                              |   |                             |
+            +--------------+---------------+   +-------------+---------------+
+                           |                               |
+                           |                               |
+                           |                               |
+                           |                               |
++----------------------+   |   +----------------------+   |   +----------------------+
+|                      |   |   |                      |   |   |                      |
+|      SA API          |   |   |      SB API          |   |   |      SC API          |
+|      (Port: 8080)    |   |   |      (Port: 8081)    |   |   |      (Port: 8082)    |
+|                      |   |   |                      |   |   |                      |
++----------------------+   |   +----------------------+   |   +----------------------+
+
+
+```
+
+
+
+Deployment Diagram:
+
+```
+
++-----------------------+       +-----------------------+       +-----------------------+
+|                       |       |                       |       |                       |
+| Simple Interest (SA)  |       | Compound Interest (SB) |       | Profit and Loss (SC)  |
+|                       |       |                       |       |                       |
+| Docker Container      |       | Docker Container      |       | Docker Container      |
+| Port: 8080            |       | Port: 8081            |       | Port: 8082            |
++-----------------------+       +-----------------------+       +-----------------------+
+
+
+```
